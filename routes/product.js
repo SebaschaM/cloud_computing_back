@@ -1,13 +1,10 @@
 import { Router } from 'express';
+import { ProductController } from '../controllers/index.js';
 
-// const { register, confirmToken, login, revalidateToken, getProfile, updateProfile } = require('../controllers/auth');
+const routerProduct = Router();
+const productController = new ProductController();
 
-const router2 = Router();
+routerProduct.get('', [], productController.findAll);
+routerProduct.get('/:id', [], productController.findById);
 
-router2.post('/product', [], (req, res) => {
-  return res.json({
-    msg: 'Hola productossss',
-  });
-});
-
-export default router2;
+export default routerProduct;
