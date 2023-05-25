@@ -1,10 +1,17 @@
 import { Router } from 'express';
+import { AuthController } from '../controllers/index.js';
+
 
 const routerAuth = Router();
+const authController = new AuthController();
 
-routerAuth.post('/login', [], (req, res) => {
+// http://localhost:3000/api/auth/login
+
+routerAuth.post('/login', [], authController.login)
+
+routerAuth.post('/register', [], (req, res) => {
   return res.json({
-    msg: 'Hola mundo',
+    msg: 'Hola register',
   });
 });
 
