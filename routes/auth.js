@@ -9,10 +9,8 @@ const authController = new AuthController();
 
 routerAuth.post('/login', [], authController.login)
 
-routerAuth.post('/register', [], (req, res) => {
-  return res.json({
-    msg: 'Hola register',
-  });
-});
+routerAuth.post('/register', [],authController.register);
+
+routerAuth.post('/profile', [],authController.getUserData); // llenar header con token
 
 export default routerAuth;
