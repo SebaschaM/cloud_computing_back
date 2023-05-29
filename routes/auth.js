@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { AuthController } from '../controllers/index.js';
+import checkAuth from '../middleware/checkAuth.js';
 
 
 const routerAuth = Router();
@@ -11,6 +12,9 @@ routerAuth.post('/login', [], authController.login)
 
 routerAuth.post('/register', [],authController.register);
 
-routerAuth.post('/profile', [],authController.getUserData); // llenar header con token
+routerAuth.get('/profile', [], checkAuth, authController.profile); // llenar header con token
+
+routerAuth.post('/revalidate', [], checkAuth, authController.revalidateToken); //considerar aquí o otra ruta para revalidar token
+routerAuth.post('/updateprofile', [], checkAuth, authController.updateProfile); // llenar header con token
 
 export default routerAuth;

@@ -4,7 +4,7 @@ const connection = await mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: 'root',
-  database: 'licoreria',
+  database: 'oficial',
 });
 
 try {

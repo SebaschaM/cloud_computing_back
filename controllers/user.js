@@ -30,29 +30,60 @@ class AuthController {
     }
   };
 
-  async getUserData(req, res) {
-    const authorizationHeader = req.headers.authorization;
-    if (!authorizationHeader || !authorizationHeader.startsWith('Bearer ')) {
-      return res.status(401).json({ message: 'Token inválido' });
-    }
-
-    const token = authorizationHeader.split(' ')[1];
+  profile = async (req, res) => {
+    const id = req.id;
+    const email = req.email;
 
     try {
-      console.log(token);
-      const decodedToken = verifyToken(token);
-      
-      
-
-      const userId = decodedToken.id;
-      const userEmail = decodedToken.email;
+      const user = await this.userService.findEmail(email);
+      if (!user) {
+        return res.status(401).json({ message: 'Usuario no encontrado' });
+      }
 
       // Operaciones con los datos del usuario...
-      return res.json({ id: userId, email: userEmail });
+      return res.json({ id: id, email: email, fullname: user.fullname, phone: user.phone });
     } catch (error) {
+      console.log(error);
       return res.status(401).json({ message: error.message });
     }
-  }
+  };
+
+  updateProfile = async (req, res) => {
+    const id = req.id;
+    const body = req.body;
+    const email = req.email;
+
+    try {
+      const updatedUser = await this.userService.updateProfile(id, body);
+      if (!updatedUser) {
+        return res.status(401).json({ message: 'Usuario no encontrado' });
+      }
+      const user = await this.userService.findEmail(email);
+      // ejecutar revaidate token, mi pregunta es el token no se actualiza?
+      return res.json({ message: 'User update', id: id, fullname: user.fullname, phone: user.phone });
+    } catch (error) {
+      console.log(error);
+      return res.status(401).json({ message: error.message });
+    }
+  };
+
+  revalidateToken = async (req, res) => {
+    const id = req.id;
+    const email = req.email;
+
+    try {
+      const user = await this.userService.findEmail(email);
+      if (!user) {
+        return res.status(401).json({ message: 'Usuario no encontrado' });
+      }
+
+      // Operaciones con los datos del usuario...
+      return res.json({ id: id, email: email, fullname: user.fullname, phone: user.phone });
+    } catch (error) {
+      console.log(error);
+      return res.status(401).json({ message: error.message });
+    }
+  };
 }
 
 export default AuthController;
