@@ -6,8 +6,6 @@ class ProductController {
   }
 
   findAll = async (req, res) => {
-    console.log(req.params);
-    console.log(req.query);
     const idBranch = req.params.idBranch;
     const products = await this.productService.getProducts(idBranch);
     return res.json(products);
