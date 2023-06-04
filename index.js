@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 
 import { routerAuth, routerProduct, routerBranch } from './routes/index.js';
-import handleConnect from './config/connectionDB.js';
+import { handleConnect } from './config/connectionDB.js';
 
 const app = express();
 app.use(cors());

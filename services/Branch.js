@@ -1,4 +1,4 @@
-import connection from '../config/connectionDB.js';
+import { connection } from '../config/connectionDB.js';
 
 class BranchService {
   constructor() {}

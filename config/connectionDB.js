@@ -19,4 +19,4 @@ async function handleConnect() {
   }
 }
 
-export default handleConnect;
+export { handleConnect, connection };
