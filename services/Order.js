@@ -24,7 +24,7 @@ class OrderService {
   async findAllOrdersByUser(idUser) {
     try {
       const query =
-        'SELECT co.*, p.* FROM customer_order co INNER JOIN customer_order_product cop ON co.id = cop.customer_order_id INNER JOIN product p ON cop.product_id = p.id WHERE co.user_id = ?';
+        'SELECT co.id AS order_id, p.id AS product_id, co.*, p.* FROM customer_order co INNER JOIN customer_order_product cop ON co.id = cop.customer_order_id INNER JOIN product p ON cop.product_id = p.id WHERE co.user_id = 1';
       const [myOrders] = await connection.query(query, [idUser]);
       return myOrders;
     } catch (error) {
