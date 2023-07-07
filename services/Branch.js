@@ -5,7 +5,7 @@ class BranchService {
 
   async getBranches() {
     try {
-      const query = 'SELECT * FROM Branch';
+      const query = 'SELECT * FROM branch';
       const [Branches] = await connection.query(query);
       return Branches;
     } catch (error) {
@@ -16,7 +16,7 @@ class BranchService {
 
   async getBranchById(id) {
     try {
-      const query = 'SELECT * FROM Branch WHERE id = ?';
+      const query = 'SELECT * FROM branch WHERE id = ?';
       const [branch] = await connection.query(query, [id]);
       if (branch.length === 0) {
         return null;
